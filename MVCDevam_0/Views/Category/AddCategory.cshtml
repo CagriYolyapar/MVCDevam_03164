@@ -1,0 +1,85 @@
+﻿@model Category
+
+@{
+    ViewBag.Title = "AddCategory";
+}
+
+@*
+        Razor Helpers    
+
+    Razor View görüntüleme motorunuzun size sunduğu avantajlardan bir tanesi  de Helper yapılarıdır...Helper yapıları cok sık kullanılan HTML taglerinin C# diliyle ifade edilebilen metotlarıdır...
+
+
+    Siz  ilgili get sayfasından bir Post işlemi yapılaca ise kesinlikle bir Form olusturmak zorundasınızdır... Razor View motorunuzun Form icin de bir Helper'i vardır..
+
+    Siz Html.BeginForm() helper'i ile bir form actıgınızda eger standartlara uygun yazılmıs bir Post action'i varsa ve farklı bir Controller'a post yapmak istemiyorsanız hicbir argüman vermenize gerek yoktur...Form yapısı verileri nereye post etmek istediginizi rahat bir şekilde anlayacaktır...
+    
+    Html.BeginForm() helper'i @using ifadesi ile kullanmanız gereken bir Helper'dir...Bunun da sebebi  Form dedigimiz tag digerlere taglere nazaran belirli bir cerceve icerisinde durması gereken bir tag oldugundan dolayı (bu cerceve tüm Post edilen yapıları post etmekle görevli bir cercevedir... Yani buranın icerisinde ciddi bilgiler olacagından dolayı bu bilgiler post edildikten sonra Ram'de durmaması gereklidir...O yüzden bir using ifadesi ile bir cerceve yaratırsınız ve Garbage Collector'in özellikle burada calısmasını zorlarsınız)
+
+
+    BeginForm yapısı normal şartlarda Form'un Post olacagı Controller'i ve Action'i ister... Ancak mevcut şartlarda önce Post request'ini kavramak gerekir...
+
+
+    Mesela burada biz verilerimizi Home Controller icerisindeki Post görevini uygulayacak AddCategory isimli Action'a göndermek istiyoruz...Eger siz bir BeginForm metoduna bir argüman vermezseniz bu metot otomatik oalrak icinde bulundugu COntroller ismini algılar, aynı zamanda icinde bulundugu Action ismini de algılar...Aynı zaman da siz bir argüman vermediginiz takdirde varsayılan yontem olarak Post yontemi ile request yapılmasını saglar...
+
+
+    ModelBinding dedigimiz sistem, ilgili Model'e istedigimiz verileri entegre etmektir...
+
+
+
+
+
+*@
+
+@using (Html.BeginForm()) 
+{
+
+    //Bir Form'un icerisinde button tag'iyle acılmıs bir button varsa siz bir şey yapmadan da sadece tıklayarak o Form'un tetiklenmesini saglar...Button , icinde bulundugu formu tetikleyecegini bilir...
+
+
+    <div class="container">
+
+        @*<input class="form-control" type="text" name="CaegoryName" placeholder="Lutfen kategori ismi giriniz" /> <br />*@
+
+        @*
+            Biz üstteki gibi düz bir html yerine Html Helper kullanmayı tercih etmeliyiz...    
+        *@
+
+        <div>
+            @Html.TextBoxFor(x => x.CategoryName, new { placeholder = "Lutfen Kategori ismi giriniz", @class = "form-control" })
+        </div>
+        <br />
+        <div>
+            @Html.TextBoxFor(x => x.Description, new {placeholder="Lutfen aciklama giriniz",@class="form-control"})
+        </div>
+     
+
+
+        <br />
+
+
+        @*<input type="button" />   
+            
+            Bu şekilde acılmıs bir button Form'u tetiklemez... BU sekilde acılmıs bir buttonun Form'u tetiklemesine istiyorsanız type'ina "submit" yazmalısınız...
+            
+            
+            *@
+
+
+
+
+        <button class="btn btn-primary">
+            Ekle
+        </button>
+
+
+
+
+    </div>
+
+
+
+
+}
+
+
